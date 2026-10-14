@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS eventhub; USE eventhub;
+CREATE TABLE users(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100),email VARCHAR(190) UNIQUE,password VARCHAR(255),role ENUM('attendee','admin') DEFAULT 'attendee');
+CREATE TABLE events(id INT AUTO_INCREMENT PRIMARY KEY,title VARCHAR(150),description TEXT,venue VARCHAR(150),event_date DATETIME,capacity INT,active BOOLEAN DEFAULT TRUE);
+CREATE TABLE registrations(id INT AUTO_INCREMENT PRIMARY KEY,user_id INT,event_id INT,UNIQUE(user_id,event_id),FOREIGN KEY(user_id) REFERENCES users(id),FOREIGN KEY(event_id) REFERENCES events(id));
+INSERT INTO events(title,description,venue,event_date,capacity) VALUES ('Technology Day','Student technology showcase','Main Hall','2027-03-15 09:00:00',100),('Career Workshop','CV and interview training','Room A','2027-04-10 10:00:00',60);
